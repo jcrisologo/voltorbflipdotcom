@@ -23,10 +23,11 @@ To just use the solver, go to http://voltorbflip.com. To run it locally, generat
 
 ```
 cd jekyll-site
-jekyll b
+bundle install
+bundle exec jekyll b
 cd ..
 docker build -t voltorbflipdotcom .
-docker run -d -p 8080:8080 voltorbflipdotcom
+docker run -d -p 8080:80 voltorbflipdotcom
 ```
 
 After completing the steps above, the solver should be accessible through the URL [http://localhost:8080](http://localhost:8080).

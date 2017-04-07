@@ -1,7 +1,7 @@
-FROM golang
-ENV VFLIP_STATIC_CONTENT_PATH /go/src/github.com/mrtenda/voltorbflipdotcom/site
-ADD ./server /go/src/github.com/mrtenda/voltorbflipdotcom/server
-ADD ./jekyll-site/_site /go/src/github.com/mrtenda/voltorbflipdotcom/site
-RUN go install github.com/mrtenda/voltorbflipdotcom/server
-ENTRYPOINT /go/bin/server
-EXPOSE 8080
+FROM python:2
+ADD ./jekyll-site/_site /var/www/public/static
+ADD ./server-python /var/www/fcgi/voltorbflip
+RUN pip install Flask
+RUN apt-get update && apt-get install -y lighttpd
+ENTRYPOINT ["lighttpd", "-Df/etc/lighttpd/lighttpd.conf"]
+EXPOSE 80
